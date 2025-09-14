@@ -35,20 +35,48 @@
   <!-- 3D Background -->
   <canvas id="bg"></canvas>
 
+  <!-- Navbar / Logo + Login -->
+  <header class="fixed top-0 left-0 w-full px-6 py-4 z-50 flex justify-between items-center bg-transparent">
+    <!-- Logo kiri -->
+    <img src="logo.png" alt="DSRT Logo" class="h-16 md:h-20">
+
+    <!-- Tombol Login kanan -->
+    <button id="loginBtn" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">
+      Login
+    </button>
+  </header>
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-gray-900 rounded-xl p-8 w-80 md:w-96">
+      <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+      <form class="flex flex-col gap-4">
+        <input type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+        <input type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Submit</button>
+      </form>
+      <button id="closeModal" class="mt-4 w-full text-sm text-gray-400 hover:text-white text-center">Cancel</button>
+    </div>
+  </div>
+
   <!-- Hero Section -->
   <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20">
     <h1 class="text-5xl md:text-7xl font-bold mb-6">DSRT</h1>
     <p class="text-xl md:text-2xl mb-8">Digital Smart Revise Technology</p>
-    <p class="text-gray-300 max-w-3xl text-center text-lg md:text-xl leading-relaxed">
+    <p class="text-gray-300 max-w-3xl text-center text-lg md:text-xl leading-relaxed mb-8">
       DSRT is a cutting-edge digital platform designed to revolutionize the way individuals and businesses 
       approach learning, revision, and workflow optimization. By integrating advanced AI-driven tools 
       with a user-friendly interface, DSRT ensures that your tasks are performed efficiently, 
       securely, and intelligently, delivering measurable productivity gains and seamless digital experiences.
     </p>
+    <a href="#features" 
+       class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">
+      Get Started
+    </a>
   </section>
 
   <!-- Features Section -->
-  <section class="py-20 px-6 bg-gray-800">
+  <section id="features" class="py-20 px-6 bg-gray-800">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-12">Our Features</h2>
       <div class="grid md:grid-cols-3 gap-8">
@@ -132,6 +160,28 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Modal Login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.remove('hidden');
+      loginModal.classList.add('flex');
+    });
+
+    closeModal.addEventListener('click', () => {
+      loginModal.classList.add('hidden');
+      loginModal.classList.remove('flex');
+    });
+
+    loginModal.addEventListener('click', (e) => {
+      if(e.target === loginModal){
+        loginModal.classList.add('hidden');
+        loginModal.classList.remove('flex');
+      }
     });
   </script>
 
