@@ -5,182 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DSRT - Digital Smart Revise Technology</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a2e0e6adad.js" crossorigin="anonymous"></script>
   <style>
-    body { margin: 0; }
-    canvas#bgCanvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: #fff;
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Hover effects for social buttons */
+    .social-btn i {
+      transition: transform 0.3s, color 0.3s;
+    }
+    .social-btn:hover i {
+      transform: scale(1.2);
+    }
+    .instagram-btn:hover i {
+      color: #f77737; /* pink/orange Instagram */
+    }
+    .github-btn:hover i {
+      color: #fff; /* white GitHub */
     }
   </style>
 </head>
-<body class="font-sans text-gray-900 relative overflow-hidden">
+<body>
 
-  <!-- Background Canvas -->
-  <canvas id="bgCanvas"></canvas>
+  <!-- 3D Background -->
+  <canvas id="bg"></canvas>
 
-  <!-- Hero -->
-  <section id="home" class="relative z-10 min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-2">DSRT</h1>
-      <p class="text-lg md:text-xl mb-6">Digital Smart Revise Technology</p>
-      <a href="#features" class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
-        Get Started
-      </a>
-    </div>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h1 class="text-5xl md:text-7xl font-bold mb-4">DSRT</h1>
+    <p class="text-xl md:text-2xl mb-6">Digital Smart Revise Technology</p>
+    <a href="#about" class="px-8 py-3 bg-indigo-600 rounded-full shadow hover:bg-indigo-500 transition">Get Started</a>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="relative z-10 py-20 bg-gray-50 px-6">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Features</h2>
-      <p class="text-gray-600 mb-12">Discover what makes DSRT unique</p>
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 text-center max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">About Us</h2>
+    <p class="text-gray-300">
+      DSRT (Digital Smart Revise Technology) is an innovative platform designed to integrate modern digital 
+      solutions with cutting-edge revision technology. Our mission is to simplify workflows and improve 
+      efficiency for both individuals and businesses.
+    </p>
+  </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
-          <i class="fas fa-bolt text-4xl text-indigo-600 mb-4"></i>
-          <h3 class="font-semibold text-lg">Fast Performance</h3>
-          <p class="text-gray-500 text-sm">Optimized for speed on any device.</p>
+  <!-- Features Section -->
+  <section id="features" class="py-20 px-6 bg-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-12">Our Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fas fa-bolt text-4xl text-indigo-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Fast & Smart</h3>
+          <p class="text-gray-400">Experience high-speed performance with optimized smart features.</p>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
-          <i class="fas fa-shield-alt text-4xl text-indigo-600 mb-4"></i>
-          <h3 class="font-semibold text-lg">Secure</h3>
-          <p class="text-gray-500 text-sm">Top-level security for your data.</p>
+        <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fas fa-lock text-4xl text-indigo-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Secure</h3>
+          <p class="text-gray-400">Your data is protected with industry-leading security protocols.</p>
         </div>
-        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
-          <i class="fas fa-mobile-alt text-4xl text-indigo-600 mb-4"></i>
-          <h3 class="font-semibold text-lg">Mobile Ready</h3>
-          <p class="text-gray-500 text-sm">Looks great on all screen sizes.</p>
+        <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <i class="fas fa-mobile-alt text-4xl text-indigo-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Mobile Friendly</h3>
+          <p class="text-gray-400">Optimized for all devices: mobile, tablet, and desktop.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="relative z-10 py-20 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">About DSRT</h2>
-      <p class="text-gray-600 mb-6">
-        DSRT (Digital Smart Revise Technology) is dedicated to delivering high-quality solutions 
-        tailored to your needs. We focus on innovation, security, and user-friendly design to help 
-        you succeed in the digital era.
-      </p>
-      <img src="https://via.placeholder.com/600x300" alt="About DSRT" class="mx-auto rounded-2xl shadow-md">
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="relative z-10 py-20 bg-gray-50 px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact DSRT</h2>
-      <p class="text-gray-600 mb-8">Have questions? Get in touch with us.</p>
-      <form class="space-y-4">
-        <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-        <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-        <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-        <button type="submit" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition w-full">
-          Send Message
-        </button>
-      </form>
-    </div>
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 text-center max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+    <p class="text-gray-300 mb-6">We’d love to hear from you! Reach out to us for collaborations, questions, or support.</p>
+    <a href="mailto:contact@dsrt.com" class="px-8 py-3 bg-indigo-600 rounded-full shadow hover:bg-indigo-500 transition">Contact Us</a>
   </section>
 
   <!-- Footer -->
-  <footer class="relative z-10 bg-gray-900 text-gray-400 py-10 px-6">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
-      
-      <!-- Brand -->
+  <footer class="bg-gray-900 text-center md:text-left px-6 py-12 mt-12">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+      <!-- About -->
       <div>
         <h3 class="text-white font-bold text-lg mb-2">DSRT</h3>
         <p class="text-gray-400 text-sm">Digital Smart Revise Technology</p>
       </div>
 
-      <!-- Navigation -->
+      <!-- Quick Links -->
       <div>
-        <h4 class="text-white font-semibold mb-4">Navigation</h4>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
         <ul class="space-y-2">
-          <li><a href="#home" class="hover:text-white">Home</a></li>
-          <li><a href="#features" class="hover:text-white">Features</a></li>
-          <li><a href="#about" class="hover:text-white">About</a></li>
-          <li><a href="#contact" class="hover:text-white">Contact</a></li>
+          <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+          <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+          <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
         </ul>
       </div>
 
-      <!-- Socials (Follow Us Buttons) -->
+      <!-- Follow Us -->
       <div>
         <h4 class="text-white font-semibold mb-4">Follow Us</h4>
-        <div class="flex flex-col md:flex-row justify-center md:justify-start gap-4">
+        <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
           <!-- Instagram -->
-          <a href="https://www.instagram.com/dsrt.official.2025" 
-             target="_blank" 
-             class="inline-flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:opacity-90 transition">
+          <a href="https://www.instagram.com/dsrt.official.2025" target="_blank" 
+             class="social-btn instagram-btn inline-flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:opacity-90 transition">
              <i class="fab fa-instagram mr-2"></i> Instagram
           </a>
           <!-- GitHub -->
-          <a href="https://github.com/mydsrt-artweb/sds" 
-             target="_blank" 
-             class="inline-flex items-center justify-center bg-gradient-to-r from-gray-800 to-black text-white font-semibold px-6 py-3 rounded-full shadow hover:opacity-90 transition">
+          <a href="https://github.com/mydsrt-artweb/sds" target="_blank" 
+             class="social-btn github-btn inline-flex items-center justify-center bg-gradient-to-r from-gray-800 to-black text-white font-semibold px-6 py-3 rounded-full shadow hover:opacity-90 transition">
              <i class="fab fa-github mr-2"></i> GitHub
           </a>
         </div>
       </div>
     </div>
-    <div class="mt-10 text-center text-gray-500 text-sm">
-      © 2025 DSRT. All rights reserved.
-    </div>
+
+    <p class="text-gray-500 text-sm mt-8">&copy; 2025 DSRT. All rights reserved.</p>
   </footer>
 
-  <!-- Background Animation Script -->
+  <!-- Three.js Background Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
-    const canvas = document.getElementById("bgCanvas");
-    const ctx = canvas.getContext("2d");
-    let width, height;
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0x6366f1, wireframe: true });
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
+
+    const pointLight = new THREE.PointLight(0xffffff);
+    pointLight.position.set(20, 20, 20);
+    scene.add(pointLight);
+
+    camera.position.z = 50;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      torusKnot.rotation.x += 0.003;
+      torusKnot.rotation.y += 0.003;
+      renderer.render(scene, camera);
     }
-    window.addEventListener("resize", resize);
-    resize();
+    animate();
 
-    const points = Array.from({ length: 60 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 1.5,
-      vy: (Math.random() - 0.5) * 1.5
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, width, height);
-      for (let i = 0; i < points.length; i++) {
-        const p = points[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#6366f1"; // Indigo
-        ctx.fill();
-
-        for (let j = i + 1; j < points.length; j++) {
-          const q = points[j];
-          const dx = p.x - q.x;
-          const dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = "rgba(99, 102, 241, 0.2)";
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
   </script>
 </body>
 </html>
