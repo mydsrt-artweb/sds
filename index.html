@@ -1,219 +1,149 @@
-<!doctype html>
-
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chess Clash - Play Flow (Mockup)</title>
-  <style>
-    :root{--bg:#5b2b21;--card:#7a3f33;--accent:#f6c86d;--muted:#d9c0b6}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    .device{width:360px;max-width:100%;height:780px;margin:16px auto;border-radius:28px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);background:linear-gradient(#3d1f19,#602a23)}
-    header{height:84px;padding:12px 14px;display:flex;align-items:center;gap:10px}
-    .profile{width:44px;height:44px;border-radius:10px;background:#1b6fb6;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    .top-info{flex:1;display:flex;flex-direction:column;gap:6px}
-    .curr{display:flex;gap:8px;justify-content:flex-end;align-items:center}
-    .bubble{background:rgba(255,255,255,.06);padding:6px 10px;border-radius:18px;color:#fff;font-weight:600}.screen{padding:10px 12px 80px;display:none;height:calc(100% - 144px);box-sizing:border-box}
-.screen.active{display:block}
-
-/* Home / Lobby */
-.banner{display:flex;gap:8px;align-items:center;justify-content:center;margin:6px 0}
-.big-btn{display:block;width:100%;padding:14px;border-radius:12px;background:linear-gradient(#f3b84a,#d1822e);color:#fff;font-size:20px;font-weight:800;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.12)}
-.medium-btn{display:block;width:100%;padding:12px;border-radius:10px;background:linear-gradient(#2f9aa1,#1b7f86);color:#fff;font-size:18px;margin-top:10px;text-align:center}
-.small-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-
-.chests{display:flex;gap:8px;margin-top:14px;justify-content:space-between}
-.chest{flex:1;background:linear-gradient(#b38e57,#8e6a3f);border-radius:8px;padding:8px;text-align:center;color:#fff}
-.nav{position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(#6f3a30,#5b3128);display:flex;align-items:center;justify-content:space-around;padding:8px 12px}
-.nav button{flex:1;background:transparent;border:0;color:#fff;font-weight:700;padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.nav .active{color:var(--accent)}
-
-/* Arena list */
-.arena-list{display:grid;grid-template-columns:1fr;gap:12px}
-.arena-card{background:linear-gradient(#0b74c1,#0a5aa0);padding:18px;border-radius:12px;color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.15)}
-
-/* Versus */
-.versus{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;height:100%}
-.player-row{display:flex;gap:12px;align-items:center}
-.avatar{width:86px;height:86px;border-radius:14px;background:#0e66a6;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
-.vsbig{font-size:44px;color:var(--accent);font-weight:900}
-
-/* Gameplay mockup */
-.board{width:320px;height:320px;background:linear-gradient(#f2ecd5,#d9b98a);border-radius:12px;margin:0 auto;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);gap:2px;padding:6px;box-sizing:border-box}
-.cell{background:rgba(0,0,0,.05);display:flex;align-items:center;justify-content:center;border-radius:4px}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:12px}
-
-/* Result */
-.result{display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:40px}
-
-/* small components */
-.popup{position:absolute;left:10%;right:10%;top:18%;background:linear-gradient(#3f211b,#5a2d26);border-radius:10px;padding:12px;color:#fff;box-shadow:0 20px 40px rgba(0,0,0,.5)}
-.close-x{position:absolute;right:6px;top:6px;background:#c43834;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800}
-
-.controls .btn{background:linear-gradient(#f6c86d,#d1822e);padding:8px 12px;border-radius:10px;font-weight:800;border:0}
-
-footer.small{position:absolute;bottom:90px;left:12px;right:12px;color:var(--muted);text-align:center;font-size:12px}
-
-@media (max-width:380px){.device{height:820px}}
-
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourBrand - Landing Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-  <div class="device" role="application" aria-label="Chess Clash - mockup">
-    <header>
-      <div class="profile">16</div>
-      <div class="top-info">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="background:rgba(255,255,255,.06);padding:6px 8px;border-radius:8px;color:#fff;font-weight:700">Gems 141</div>
-          <div style="background:rgba(255,255,255,.06);padding:6px 8px;border-radius:8px;color:#fff;font-weight:700">Coins 24085</div>
-        </div>
-        <div style="font-size:12px;color:rgba(255,255,255,.8)">Chess Pass • 16d 23h</div>
-      </div>
-      <div style="width:46px"></div>
-    </header><!-- Screens -->
-<main>
-  <section id="loading" class="screen active">
-    <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff">
-      <div style="font-weight:900;font-size:24px;margin-bottom:18px">CHESS CLASH</div>
-      <div style="width:96px;height:96px;border-radius:50%;border:8px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">
-        <div id="spinner" style="width:48px;height:48px;border:6px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%"></div>
-      </div>
-      <div style="margin-top:18px;color:rgba(255,255,255,.8)">Loading...</div>
+<body class="font-sans text-gray-800">
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 md:px-20">
+    <div class="flex-1 text-center md:text-left">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to YourBrand</h1>
+      <p class="text-lg md:text-xl mb-6">Building modern solutions for a digital future.</p>
+      <a href="#features" class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
+        Get Started
+      </a>
+    </div>
+    <div class="flex-1 mt-10 md:mt-0 flex justify-center">
+      <img src="https://via.placeholder.com/400x300" alt="Hero Image" class="rounded-2xl shadow-lg">
     </div>
   </section>
 
-  <section id="home" class="screen">
-    <div class="banner">
-      <div style="flex:1"></div>
-      <div style="flex:10">
-        <div style="display:flex;gap:8px;justify-content:center">
-          <div class="bubble">Free Rewards</div>
-          <div class="bubble">Lucky Box</div>
-          <div class="bubble">Leaderboards</div>
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-gray-50 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Features</h2>
+      <p class="text-gray-600 mb-12">Discover what makes us unique</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center">
+          <i class="fas fa-bolt text-4xl text-indigo-600 mb-4"></i>
+          <h3 class="font-semibold text-lg">Fast Performance</h3>
+          <p class="text-gray-500 text-sm">Optimized for speed on any device.</p>
         </div>
-      </div>
-      <div style="flex:1"></div>
-    </div>
-
-    <div style="margin-top:6px">
-      <button class="big-btn" onclick="goto('modes')">Classic Chess</button>
-      <button class="medium-btn" onclick="goto('modes')">Quick Chess</button>
-      <div class="small-grid">
-        <button class="medium-btn" onclick="alert('vs computer')">Vs. Computer</button>
-        <button class="medium-btn" onclick="alert('mail chess')">Mail Chess</button>
-      </div>
-    </div>
-
-    <div class="chests">
-      <div class="chest">Tap to Unlock<br><small>03h 00m</small></div>
-      <div class="chest" style="background:linear-gradient(#f6c86d,#d1822e);color:#3a1b12">Ready<br><button class="btn" onclick="alert('open chest')" style="margin-top:8px;padding:6px 10px;border-radius:6px;border:0">Open</button></div>
-      <div class="chest">Tap to Unlock<br><small>03h 00m</small></div>
-      <div class="chest">Tap to Unlock<br><small>03h 00m</small></div>
-    </div>
-
-    <footer class="small">Tip: Login with a social network to secure your game progress</footer>
-  </section>
-
-  <section id="modes" class="screen">
-    <div style="padding:6px">
-      <h3 style="color:#fff">Pilih Arena</h3>
-      <div class="arena-list">
-        <div class="arena-card">
-          <div style="font-weight:900;font-size:18px">London</div>
-          <div style="margin-top:8px">Prize: 20 000 • Entry fee: 11 000 • Players online: 183</div>
-          <div style="margin-top:8px"><button class="btn" onclick="selectArena('London')">Play</button></div>
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center">
+          <i class="fas fa-shield-alt text-4xl text-indigo-600 mb-4"></i>
+          <h3 class="font-semibold text-lg">Secure</h3>
+          <p class="text-gray-500 text-sm">Top-level security for your data.</p>
         </div>
-        <div class="arena-card" style="background:linear-gradient(#2b7fc8,#0d63a1)">
-          <div style="font-weight:900;font-size:18px">Paris</div>
-          <div style="margin-top:8px">Prize: 15 000 • Entry fee: 8 000 • Players online: 141</div>
-          <div style="margin-top:8px"><button class="btn" onclick="selectArena('Paris')">Play</button></div>
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition text-center">
+          <i class="fas fa-mobile-alt text-4xl text-indigo-600 mb-4"></i>
+          <h3 class="font-semibold text-lg">Mobile Ready</h3>
+          <p class="text-gray-500 text-sm">Looks great on all screen sizes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="versus" class="screen">
-    <div class="versus">
-      <div class="player-row">
-        <div style="text-align:center"><div class="avatar">16</div><div style="margin-top:6px;color:#fff">Guest_8407452</div></div>
-        <div class="vsbig">VS</div>
-        <div style="text-align:center"><div class="avatar" style="background:#6a4b2a">22</div><div style="margin-top:6px;color:#fff">Guest_7807626</div></div>
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-3xl font-bold mb-4">About Us</h2>
+        <p class="text-gray-600 mb-6">
+          YourBrand is committed to delivering the best digital experiences. 
+          We focus on innovation, security, and user-centered design.
+        </p>
+        <a href="#contact" class="bg-indigo-600 text-white px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition">
+          Contact Us
+        </a>
       </div>
-      <div style="color:rgba(255,255,255,.9)">Paris • Classic Chess</div>
-      <div><button class="btn" onclick="goto('game')">Start Match</button></div>
+      <div class="flex justify-center">
+        <img src="https://via.placeholder.com/400x300" alt="About Image" class="rounded-2xl shadow-lg">
+      </div>
     </div>
   </section>
 
-  <section id="game" class="screen">
-    <div style="text-align:center;color:#fff;font-weight:800;margin-top:6px">Classic Chess • Paris</div>
-    <div class="board" role="grid" aria-label="chess board">
-      <!-- simple 8x8 cells mockup -->
-      <script>for(let r=0;r<64;r++){document.write('<div class="cell" role="gridcell"></div>')}</script>
-    </div>
-    <div class="controls">
-      <button class="btn" onclick="endGame('win')">I Win</button>
-      <button class="btn" onclick="endGame('lose')">I Lose</button>
-      <button class="btn" onclick="endGame('draw')">Draw</button>
-    </div>
-  </section>
-
-  <section id="result" class="screen">
-    <div class="result">
-      <div style="font-size:22px;color:var(--accent);font-weight:900">You Win!</div>
-      <div style="color:#fff">Coins earned: 11 000</div>
-      <div><button class="btn" onclick="goto('home')">Return to Lobby</button></div>
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-50 px-6 md:px-20">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
+      <p class="text-gray-600 mb-8">We would love to hear from you. Send us a message!</p>
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="email" placeholder="Your Email" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <textarea placeholder="Your Message" rows="5" class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+        <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition">
+          Send Message
+        </button>
+      </form>
     </div>
   </section>
 
-  <!-- Booster popup example -->
-  <div id="popup" class="popup" style="display:none">
-    <div class="close-x" onclick="hidePopup()">×</div>
-    <div style="font-size:20px;font-weight:900">Booster Bundle</div>
-    <div style="margin-top:8px;color:rgba(255,255,255,.9)">Coins 50 000 + Remove All Ads • Rp 14.000</div>
-    <div style="margin-top:8px;color:rgba(255,255,255,.9)">Gems 1 050 + Remove All Ads • Rp 28.000</div>
-    <div style="margin-top:12px;display:flex;gap:8px"><button class="btn" onclick="buy('coins')">Buy Coins</button><button class="btn" onclick="buy('gems')">Buy Gems</button></div>
-  </div>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-center md:text-left">
 
-</main>
+      <!-- Brand -->
+      <div>
+        <h2 class="text-2xl font-bold text-white mb-4">YourBrand</h2>
+        <p class="text-gray-400">Building modern solutions for a digital future. Stay connected with us and grow together.</p>
+      </div>
 
-<nav class="nav" role="navigation" aria-label="bottom navigation">
-  <button id="nav-home" onclick="goto('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 10.5L12 4l9 6.5V20a1 1 0 0 1-1 1h-4v-6H8v6H4a1 1 0 0 1-1-1V10.5z" fill="#fff"/></svg><span>Home</span></button>
-  <button id="nav-friends" onclick="alert('friends')"><svg width="20" height="20"><circle cx="10" cy="8" r="3" fill="#fff"/></svg><span>Friends</span></button>
-  <button id="nav-eq" onclick="alert('equipment')"><svg width="20" height="20"><rect width="18" height="10" x="3" y="6" rx="2" fill="#fff"/></svg><span>Equip</span></button>
-  <button id="nav-events" onclick="alert('events')"><svg width="20" height="20"><path d="M3 10h18v8H3z" fill="#fff"/></svg><span>Events</span></button>
-  <button id="nav-shop" onclick="showPopup()"><svg width="20" height="20"><rect width="18" height="12" x="3" y="6" rx="2" fill="#fff"/></svg><span>Shop</span></button>
-</nav>
+      <!-- Navigation -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Navigation</h3>
+        <ul class="space-y-2">
+          <li><a href="#home" class="hover:text-white transition">Home</a></li>
+          <li><a href="#features" class="hover:text-white transition">Features</a></li>
+          <li><a href="#about" class="hover:text-white transition">About</a></li>
+          <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+        </ul>
+      </div>
 
-  </div>  <script>
-    // basic flow script
-    const screens = ['loading','home','modes','versus','game','result']
-    function show(id){
-      screens.forEach(s=>document.getElementById(s).classList.remove('active'))
-      document.getElementById(id).classList.add('active')
-      // update nav active
-      document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'))
-      if(id==='home') document.getElementById('nav-home').classList.add('active')
-    }
+      <!-- Contact -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
+        <ul class="space-y-2">
+          <li><span>Email:</span> support@yourbrand.com</li>
+          <li><span>Phone:</span> +1 234 567 890</li>
+          <li><span>Address:</span> 123 Main St, City, Country</li>
+        </ul>
+      </div>
 
-    // loading -> home after 1.6s
-    setTimeout(()=>{
-      // animate spinner
-      const spin=document.getElementById('spinner');
-      let rot=0; setInterval(()=>{rot+=12; spin.style.transform='rotate('+rot+'deg)';},40)
-    },10)
-    setTimeout(()=>{show('home')},1600)
+      <!-- Follow Us -->
+      <div class="text-center md:text-left">
+        <h3 class="text-lg font-semibold text-white mb-4">Follow Us</h3>
+        <div class="flex justify-center md:justify-start space-x-3 text-xl">
+          <a href="https://facebook.com" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white hover:opacity-80 transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-400 text-white hover:opacity-80 transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-pink-500 text-white hover:opacity-80 transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white hover:opacity-80 transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white hover:opacity-80 transition">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
 
-    function goto(name){ show(name) }
-    function selectArena(name){ show('versus') }
-    function endGame(outcome){
-      const res=document.querySelector('#result .result div');
-      if(outcome==='win') res.innerText='You Win!'
-      if(outcome==='lose') res.innerText='You Lose'
-      if(outcome==='draw') res.innerText='Draw'
-      show('result')
-    }
-    function showPopup(){ document.getElementById('popup').style.display='block' }
-    function hidePopup(){ document.getElementById('popup').style.display='none' }
-    function buy(x){ alert('Mock buy: '+x); hidePopup() }
-  </script></body>
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-10 text-center text-gray-500 text-sm">
+      © 2025 YourBrand. All rights reserved.
+    </div>
+  </footer>
+
+</body>
 </html>
