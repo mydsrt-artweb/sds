@@ -28,6 +28,40 @@
     .social-icon:hover svg {
       transform: scale(1.2);
     }
+    /* Fade forms */
+    .form-section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .form-section.active {
+      display: block;
+      opacity: 1;
+    }
+    /* Toast */
+    #toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: none;
+    }
+    .toast-message {
+      padding: 12px 20px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: fadeInOut 3s forwards;
+    }
+    .toast-success { background: #16a34a; color: white; }
+    .toast-error { background: #dc2626; color: white; }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(-10px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
@@ -35,7 +69,7 @@
   <!-- 3D Background -->
   <canvas id="bg"></canvas>
 
-  <!-- Navbar / Logo + Login -->
+  <!-- Navbar -->
   <header class="w-full px-6 py-6 flex justify-between items-center bg-gradient-to-b from-gray-900/80 to-transparent">
     <img src="erasebg-transformed.png" alt="DSRT Logo" class="h-16 md:h-20">
     <button id="loginBtn" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">Login</button>
@@ -43,16 +77,52 @@
 
   <!-- Modal Login -->
   <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-gray-900 rounded-xl p-8 w-80 md:w-96">
-      <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
-      <form class="flex flex-col gap-4">
-        <input type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-        <input type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-        <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Submit</button>
-      </form>
-      <button id="closeModal" class="mt-4 w-full text-sm text-gray-400 hover:text-white text-center">Cancel</button>
+    <div class="bg-gray-900 rounded-xl p-8 w-80 md:w-96 relative">
+      <!-- Login -->
+      <div id="loginForm" class="form-section active">
+        <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+        <form id="loginFormEl" class="flex flex-col gap-4">
+          <input id="loginEmail" type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <input id="loginPassword" type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Submit</button>
+        </form>
+        <div class="flex justify-between text-sm text-gray-400 mt-4">
+          <button id="showRegister" class="hover:text-white">Register</button>
+          <button id="showForgot" class="hover:text-white">Forgot Password?</button>
+        </div>
+        <button id="closeModal" class="mt-4 w-full text-sm text-gray-400 hover:text-white text-center">Cancel</button>
+      </div>
+
+      <!-- Register -->
+      <div id="registerForm" class="form-section">
+        <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
+        <form id="registerFormEl" class="flex flex-col gap-4">
+          <input id="regUsername" type="text" placeholder="Username" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <input id="regEmail" type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <input id="regPassword" type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Register</button>
+        </form>
+        <div class="flex justify-between text-sm text-gray-400 mt-4">
+          <button id="backToLogin1" class="hover:text-white">Back to Login</button>
+        </div>
+      </div>
+
+      <!-- Forgot -->
+      <div id="forgotForm" class="form-section">
+        <h2 class="text-2xl font-bold mb-4 text-center">Forgot Password</h2>
+        <form id="forgotFormEl" class="flex flex-col gap-4">
+          <input id="forgotEmail" type="email" placeholder="Enter your email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
+          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Reset Password</button>
+        </form>
+        <div class="flex justify-between text-sm text-gray-400 mt-4">
+          <button id="backToLogin2" class="hover:text-white">Back to Login</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
 
   <!-- Hero Section -->
   <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20">
@@ -91,48 +161,6 @@
     </div>
   </section>
 
-  <!-- Modern Icons Section -->
-  <section class="py-12 bg-gray-800">
-    <div class="max-w-6xl mx-auto text-center">
-      <h3 class="text-2xl font-bold mb-8">Powered By</h3>
-      <div class="flex flex-col items-center gap-8">
-
-        <!-- AI -->
-        <div class="flex flex-col items-center text-indigo-400 hover:scale-110 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mb-2 text-indigo-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L15 8H9L12 2zM2 12L8 15V9L2 12zM12 22l-3-6h6l-3 6zM22 12l-6 3V9l6 3z"/>
-          </svg>
-          <p class="text-sm text-white">AI</p>
-        </div>
-
-        <!-- Cloud -->
-        <div class="flex flex-col items-center text-blue-400 hover:scale-110 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mb-2 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19 18H6a4 4 0 010-8h.26A6.5 6.5 0 0118 9.5h1a4.5 4.5 0 010 9z"/>
-          </svg>
-          <p class="text-sm text-white">Cloud</p>
-        </div>
-
-        <!-- Mobile -->
-        <div class="flex flex-col items-center text-green-400 hover:scale-110 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mb-2 text-green-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2z"/>
-          </svg>
-          <p class="text-sm text-white">Mobile</p>
-        </div>
-
-        <!-- Security -->
-        <div class="flex flex-col items-center text-yellow-400 hover:scale-110 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mb-2 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 1l8 4v6c0 5.25-3.5 10-8 11-4.5-1-8-5.75-8-11V5l8-4z"/>
-          </svg>
-          <p class="text-sm text-white">Security</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer class="bg-gray-900 text-center md:text-left px-6 py-12 mt-12">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -156,7 +184,7 @@
     <p class="text-gray-500 text-sm mt-8">&copy; 2025 DSRT. All rights reserved.</p>
   </footer>
 
-  <!-- Three.js Background Script -->
+  <!-- Three.js Background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
     const scene = new THREE.Scene();
@@ -189,28 +217,99 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Modal Login
+    // Modal logic
     const loginBtn = document.getElementById('loginBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.getElementById('closeModal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const forgotForm = document.getElementById('forgotForm');
+
+    const showRegister = document.getElementById('showRegister');
+    const showForgot = document.getElementById('showForgot');
+    const backToLogin1 = document.getElementById('backToLogin1');
+    const backToLogin2 = document.getElementById('backToLogin2');
+
+    function switchForm(show, hide1, hide2) {
+      [hide1, hide2].forEach(el => { el.classList.remove('active'); });
+      show.classList.add('active');
+    }
 
     loginBtn.addEventListener('click', () => {
       loginModal.classList.remove('hidden');
       loginModal.classList.add('flex');
+      switchForm(loginForm, registerForm, forgotForm);
     });
-
     closeModal.addEventListener('click', () => {
       loginModal.classList.add('hidden');
       loginModal.classList.remove('flex');
+      switchForm(loginForm, registerForm, forgotForm);
     });
-
     loginModal.addEventListener('click', (e) => {
       if(e.target === loginModal){
         loginModal.classList.add('hidden');
         loginModal.classList.remove('flex');
+        switchForm(loginForm, registerForm, forgotForm);
       }
     });
-  </script>
 
+    showRegister.addEventListener('click', () => switchForm(registerForm, loginForm, forgotForm));
+    showForgot.addEventListener('click', () => switchForm(forgotForm, loginForm, registerForm));
+    backToLogin1.addEventListener('click', () => switchForm(loginForm, registerForm, forgotForm));
+    backToLogin2.addEventListener('click', () => switchForm(loginForm, registerForm, forgotForm));
+
+    // Toast logic
+    const toast = document.getElementById('toast');
+    function showToast(message, type="success") {
+      const msg = document.createElement('div');
+      msg.classList.add('toast-message', type === "error" ? 'toast-error' : 'toast-success');
+      msg.innerText = message;
+      toast.appendChild(msg);
+      toast.style.display = "block";
+      setTimeout(() => {
+        msg.remove();
+        if(toast.childElementCount === 0) toast.style.display = "none";
+      }, 3000);
+    }
+
+    // Validation helpers
+    function validEmail(email){ return /^[^@]+@[^@]+\.[^@]+$/.test(email); }
+    function validPassword(pass){ return pass.length >= 6; }
+
+    // Login validation
+    document.getElementById("loginFormEl").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const pass = document.getElementById("loginPassword").value.trim();
+      if(!validEmail(email)) return showToast("Invalid email format","error");
+      if(!validPassword(pass)) return showToast("Password must be at least 6 chars","error");
+      showToast("Login successful!","success");
+      setTimeout(()=>{ 
+        window.location.href = "dashboard.html"; 
+      }, 1000);
+    });
+
+    // Register validation
+    document.getElementById("registerFormEl").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const user = document.getElementById("regUsername").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const pass = document.getElementById("regPassword").value.trim();
+      if(user.length < 3) return showToast("Username must be at least 3 chars","error");
+      if(!validEmail(email)) return showToast("Invalid email format","error");
+      if(!validPassword(pass)) return showToast("Password must be at least 6 chars","error");
+      showToast("Registration successful!","success");
+      setTimeout(()=> switchForm(loginForm, registerForm, forgotForm), 1500);
+    });
+
+    // Forgot password validation
+    document.getElementById("forgotFormEl").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value.trim();
+      if(!validEmail(email)) return showToast("Invalid email format","error");
+      showToast("Reset link sent to your email!","success");
+      setTimeout(()=> switchForm(loginForm, registerForm, forgotForm), 1500);
+    });
+  </script>
 </body>
 </html>
