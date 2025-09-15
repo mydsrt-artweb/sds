@@ -6,62 +6,10 @@
   <title>DSRT - Digital Smart Revise Technology</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0f172a;
-      color: #fff;
-      font-family: sans-serif;
-      overflow-x: hidden;
-    }
-    canvas#bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    .social-icon svg {
-      transition: transform 0.3s, color 0.3s;
-    }
-    .social-icon:hover svg {
-      transform: scale(1.2);
-    }
-    /* Fade forms */
-    .form-section {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .form-section.active {
-      display: block;
-      opacity: 1;
-    }
-    /* Toast */
-    #toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: none;
-    }
-    .toast-message {
-      padding: 12px 20px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      font-weight: 500;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      animation: fadeInOut 3s forwards;
-    }
-    .toast-success { background: #16a34a; color: white; }
-    .toast-error { background: #dc2626; color: white; }
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(-10px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-10px); }
-    }
+    body { margin:0; padding:0; background:#0f172a; color:#fff; font-family:sans-serif; overflow-x:hidden; }
+    canvas#bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .social-icon svg { transition: transform 0.3s, color 0.3s; }
+    .social-icon:hover svg { transform: scale(1.2); }
   </style>
 </head>
 <body>
@@ -72,88 +20,33 @@
   <!-- Navbar -->
   <header class="w-full px-6 py-6 flex justify-between items-center bg-gradient-to-b from-gray-900/80 to-transparent">
     <img src="erasebg-transformed.png" alt="DSRT Logo" class="h-16 md:h-20">
-    <button id="loginBtn" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">Login</button>
+    <a href="../auth/login.html" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">Login</a>
   </header>
 
-  <!-- Modal Login -->
-  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-gray-900 rounded-xl p-8 w-80 md:w-96 relative">
-      <!-- Login -->
-      <div id="loginForm" class="form-section active">
-        <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
-        <form id="loginFormEl" class="flex flex-col gap-4">
-          <input id="loginEmail" type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <input id="loginPassword" type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Submit</button>
-        </form>
-        <div class="flex justify-between text-sm text-gray-400 mt-4">
-          <button id="showRegister" class="hover:text-white">Register</button>
-          <button id="showForgot" class="hover:text-white">Forgot Password?</button>
-        </div>
-        <button id="closeModal" class="mt-4 w-full text-sm text-gray-400 hover:text-white text-center">Cancel</button>
-      </div>
-
-      <!-- Register -->
-      <div id="registerForm" class="form-section">
-        <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
-        <form id="registerFormEl" class="flex flex-col gap-4">
-          <input id="regUsername" type="text" placeholder="Username" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <input id="regEmail" type="email" placeholder="Email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <input id="regPassword" type="password" placeholder="Password" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Register</button>
-        </form>
-        <div class="flex justify-between text-sm text-gray-400 mt-4">
-          <button id="backToLogin1" class="hover:text-white">Back to Login</button>
-        </div>
-      </div>
-
-      <!-- Forgot -->
-      <div id="forgotForm" class="form-section">
-        <h2 class="text-2xl font-bold mb-4 text-center">Forgot Password</h2>
-        <form id="forgotFormEl" class="flex flex-col gap-4">
-          <input id="forgotEmail" type="email" placeholder="Enter your email" class="p-3 rounded bg-gray-800 text-white focus:outline-none">
-          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition">Reset Password</button>
-        </form>
-        <div class="flex justify-between text-sm text-gray-400 mt-4">
-          <button id="backToLogin2" class="hover:text-white">Back to Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast"></div>
-
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-20">
     <h1 class="text-5xl md:text-7xl font-bold mb-6">DSRT</h1>
     <p class="text-xl md:text-2xl mb-8">Digital Smart Revise Technology</p>
     <p class="text-gray-300 max-w-3xl text-center text-lg md:text-xl leading-relaxed mb-8">
-      DSRT is a cutting-edge digital platform designed to revolutionize the way individuals and businesses 
-      approach learning, revision, and workflow optimization. By integrating advanced AI-driven tools 
-      with a user-friendly interface, DSRT ensures that your tasks are performed efficiently, 
-      securely, and intelligently, delivering measurable productivity gains and seamless digital experiences.
+      DSRT is a cutting-edge digital platform designed to revolutionize learning, revision, and workflow optimization.
     </p>
     <a href="#features" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg transition">Get Started</a>
   </section>
 
-  <!-- Features Section -->
+  <!-- Features -->
   <section id="features" class="py-20 px-6 bg-gray-800">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-12">Our Features</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <i class="fas fa-bolt text-4xl text-indigo-400 mb-4"></i>
           <h3 class="text-xl font-semibold mb-2">Fast & Smart</h3>
           <p class="text-gray-400">Experience high-speed performance with optimized smart features.</p>
         </div>
         <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <i class="fas fa-lock text-4xl text-indigo-400 mb-4"></i>
           <h3 class="text-xl font-semibold mb-2">Secure</h3>
           <p class="text-gray-400">Your data is protected with industry-leading security protocols.</p>
         </div>
         <div class="bg-gray-900 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <i class="fas fa-mobile-alt text-4xl text-indigo-400 mb-4"></i>
           <h3 class="text-xl font-semibold mb-2">Mobile Friendly</h3>
           <p class="text-gray-400">Optimized for all devices: mobile, tablet, and desktop.</p>
         </div>
@@ -169,22 +62,14 @@
         <p class="text-gray-400 text-sm">Digital Smart Revise Technology</p>
       </div>
       <div class="flex gap-6">
-        <a href="https://www.instagram.com/dsrt.official.2025" target="_blank" class="social-icon text-white hover:text-pink-500 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2a.75.75 0 110 1.5.75.75 0 010-1.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/>
-          </svg>
-        </a>
-        <a href="https://github.com/mydsrt-artweb/sds" target="_blank" class="social-icon text-white hover:text-gray-400 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.373 0 12a12 12 0 008.21 11.42c.6.11.82-.26.82-.58v-2.2c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.35-1.79-1.35-1.79-1.1-.75.08-.74.08-.74 1.22.09 1.86 1.26 1.86 1.26 1.08 1.85 2.83 1.31 3.52 1 .11-.77.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.24-3.25-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.44 11.44 0 016 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.85 1.24 1.93 1.24 3.25 0 4.63-2.8 5.65-5.48 5.95.43.37.82 1.1.82 2.22v3.29c0 .32.21.69.83.58A12.01 12.01 0 0024 12c0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
+        <a href="https://www.instagram.com/dsrt.official.2025" target="_blank" class="social-icon text-white hover:text-pink-500 transition">Instagram</a>
+        <a href="https://github.com/mydsrt-artweb/sds" target="_blank" class="social-icon text-white hover:text-gray-400 transition">Github</a>
       </div>
     </div>
     <p class="text-gray-500 text-sm mt-8">&copy; 2025 DSRT. All rights reserved.</p>
   </footer>
 
-  <!-- Three.js Background -->
+  <!-- Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
     const scene = new THREE.Scene();
@@ -202,114 +87,24 @@
     scene.add(pointLight);
 
     camera.position.z = 50;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      torusKnot.rotation.x += 0.003;
-      torusKnot.rotation.y += 0.003;
-      renderer.render(scene, camera);
-    }
+    function animate(){ requestAnimationFrame(animate); torusKnot.rotation.x += 0.003; torusKnot.rotation.y += 0.003; renderer.render(scene, camera); }
     animate();
 
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+    window.addEventListener('resize', ()=>{ camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,window.innerHeight); });
 
-    // Modal logic
-    const loginBtn = document.getElementById('loginBtn');
-    const loginModal = document.getElementById('loginModal');
-    const closeModal = document.getElementById('closeModal');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const forgotForm = document.getElementById('forgotForm');
-
-    const showRegister = document.getElementById('showRegister');
-    const showForgot = document.getElementById('showForgot');
-    const backToLogin1 = document.getElementById('backToLogin1');
-    const backToLogin2 = document.getElementById('backToLogin2');
-
-    function switchForm(show, hide1, hide2) {
-      [hide1, hide2].forEach(el => { el.classList.remove('active'); });
-      show.classList.add('active');
+    // Toast
+    function showToast(msg, color="bg-green-600"){ 
+      const toast=document.createElement("div"); 
+      toast.className=`fixed top-5 right-5 ${color} text-white px-4 py-2 rounded shadow-lg z-50`; 
+      toast.innerText=msg; 
+      document.body.appendChild(toast); 
+      setTimeout(()=>toast.remove(),3000); 
     }
-
-    loginBtn.addEventListener('click', () => {
-      loginModal.classList.remove('hidden');
-      loginModal.classList.add('flex');
-      switchForm(loginForm, registerForm, forgotForm);
-    });
-    closeModal.addEventListener('click', () => {
-      loginModal.classList.add('hidden');
-      loginModal.classList.remove('flex');
-      switchForm(loginForm, registerForm, forgotForm);
-    });
-    loginModal.addEventListener('click', (e) => {
-      if(e.target === loginModal){
-        loginModal.classList.add('hidden');
-        loginModal.classList.remove('flex');
-        switchForm(loginForm, registerForm, forgotForm);
-      }
-    });
-
-    showRegister.addEventListener('click', () => switchForm(registerForm, loginForm, forgotForm));
-    showForgot.addEventListener('click', () => switchForm(forgotForm, loginForm, registerForm));
-    backToLogin1.addEventListener('click', () => switchForm(loginForm, registerForm, forgotForm));
-    backToLogin2.addEventListener('click', () => switchForm(loginForm, registerForm, forgotForm));
-
-    // Toast logic
-    const toast = document.getElementById('toast');
-    function showToast(message, type="success") {
-      const msg = document.createElement('div');
-      msg.classList.add('toast-message', type === "error" ? 'toast-error' : 'toast-success');
-      msg.innerText = message;
-      toast.appendChild(msg);
-      toast.style.display = "block";
-      setTimeout(() => {
-        msg.remove();
-        if(toast.childElementCount === 0) toast.style.display = "none";
-      }, 3000);
+    const toastMsg=localStorage.getItem("dsrt_toast"); 
+    if(toastMsg){ 
+      showToast(toastMsg, toastMsg.includes("Logged out")?"bg-red-600":"bg-green-600"); 
+      localStorage.removeItem("dsrt_toast"); 
     }
-
-    // Validation helpers
-    function validEmail(email){ return /^[^@]+@[^@]+\.[^@]+$/.test(email); }
-    function validPassword(pass){ return pass.length >= 6; }
-
-    // Login validation
-    document.getElementById("loginFormEl").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const pass = document.getElementById("loginPassword").value.trim();
-      if(!validEmail(email)) return showToast("Invalid email format","error");
-      if(!validPassword(pass)) return showToast("Password must be at least 6 chars","error");
-      showToast("Login successful!","success");
-      setTimeout(()=>{ 
-        window.location.href = "dashboard.html"; 
-      }, 1000);
-    });
-
-    // Register validation
-    document.getElementById("registerFormEl").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const user = document.getElementById("regUsername").value.trim();
-      const email = document.getElementById("regEmail").value.trim();
-      const pass = document.getElementById("regPassword").value.trim();
-      if(user.length < 3) return showToast("Username must be at least 3 chars","error");
-      if(!validEmail(email)) return showToast("Invalid email format","error");
-      if(!validPassword(pass)) return showToast("Password must be at least 6 chars","error");
-      showToast("Registration successful!","success");
-      setTimeout(()=> switchForm(loginForm, registerForm, forgotForm), 1500);
-    });
-
-    // Forgot password validation
-    document.getElementById("forgotFormEl").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("forgotEmail").value.trim();
-      if(!validEmail(email)) return showToast("Invalid email format","error");
-      showToast("Reset link sent to your email!","success");
-      setTimeout(()=> switchForm(loginForm, registerForm, forgotForm), 1500);
-    });
   </script>
 </body>
 </html>
